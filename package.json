@@ -1,0 +1,17 @@
+{
+  "name": "test-sites",
+  "version": "1.0.0",
+  "description": "sample sites to celf.io",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.12.4",
+    "mdns": "^2.2.8",
+    "morgan": "^1.5.3"
+  }
+}
