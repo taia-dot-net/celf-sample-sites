@@ -1,6 +1,7 @@
 var http = require('http');
 var express = require('express');
 var Path = require('path');
+var os = require('os');
 var logger = require('morgan');
 var mdns = require('mdns');
 
@@ -18,7 +19,7 @@ function advertiseService(name, port, path){
 	}
 
 	var ad = mdns.createAdvertisement('_http._tcp', port, 
-		{ 	'name': name,
+		{ 	'name': name ,
 		  	'txtRecord': txtRecord }	 );
 	console.log('start advertising for "' + name + '" on', port)
 	ad.start();	
@@ -31,7 +32,6 @@ function createServer(port){
 	server.listen(port, createListener(this.port));
 
 	this.app.use(logger('dev'));
-	return this; 
 }
 
 createServer.prototype.addStaticPath = function (serviceName, folder, path){
@@ -41,7 +41,6 @@ createServer.prototype.addStaticPath = function (serviceName, folder, path){
 	return this; 
 }
 
-
 /* create two spearate servers*/ 
 var server_a = new createServer(3000).addStaticPath('A Store', '/site-a', '/');
 var server_b = new createServer(3001).addStaticPath('B True', '/site-b', '/');
@@ -49,5 +48,5 @@ var server_b = new createServer(3001).addStaticPath('B True', '/site-b', '/');
 
 /* create one server width to services on different paths  */ 
 var server_c = new createServer(3002).addStaticPath('celf', '/site-c', '/c')
-				.addStaticPath('Demo', '/site-d', '/d')
+				.addStaticPath('Demo with a long long long long service name', '/site-d', '/d')
 				.addStaticPath('Embrace', '/site-e', '/');
